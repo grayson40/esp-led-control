@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LED Controller</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="navbar">LED Controller</div>
+
+    <div class="center">
+        <h2>Color</h2>
+        <div class="btn-group">
+            <button class="button" id="red" onclick="changeColor(this)">Red</button>
+            <button class="button" id="green" onclick="changeColor(this)">Green</button>
+            <button class="button" id="blue" onclick="changeColor(this)">Blue</button>
+            <button class="button" id="purple" onclick="changeColor(this)">Purple</button>
+            <button class="button" id="yellow" onclick="changeColor(this)">Yellow</button>
+        </div>
+    </div>
+
+    <div class="center">
+        <h2>Brightness</h2>
+        <div class="btn-group">
+            <button class="button" id="low" onclick="changeBrightness(this)">Low</button>
+            <button class="button" id="med" onclick="changeBrightness(this)">Medium</button>
+            <button class="button" id="high" onclick="changeBrightness(this)">High</button>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p id="text">Created by: Grayson Crozier</p>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
