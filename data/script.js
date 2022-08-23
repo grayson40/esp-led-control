@@ -34,15 +34,15 @@ function changeBrightness(button) {
 
     switch (x) {
         case 'low':
-            xhttp.open("/GET", "/low");
+            xhttp.open("GET", "/low");
             xhttp.send();
             break;
         case 'mid':
-            xhttp.open("/GET", "/mid");
+            xhttp.open("GET", "/mid");
             xhttp.send();
             break;
         case 'high':
-            xhttp.open("/GET", "/high");
+            xhttp.open("GET", "/high");
             xhttp.send();
             break;
     }
