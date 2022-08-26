@@ -10,9 +10,9 @@
 #define SLOW 100
 #define MEDIUM 50
 #define FAST 5
-#define LOW 35
+#define LO 35
 #define MID 75
-#define HIGH 150
+#define HI 150
 
 // LED strip array.
 CRGB leds[NUM_LEDS];
@@ -24,6 +24,26 @@ const char *password = "famousspoon624";
 
 // Create AsyncWebServer object on port 80
 AsyncWebServer server(80);
+
+// Input a value 0 to 255 to get a color value.
+// The colours are a transition r - g - b - back to r.
+CRGB Wheel(byte WheelPos)
+{
+    if (WheelPos < 85)
+    {
+        return CRGB(WheelPos * 3, 255 - WheelPos * 3, 0);
+    }
+    else if (WheelPos < 170)
+    {
+        WheelPos -= 85;
+        return CRGB(255 - WheelPos * 3, 0, WheelPos * 3);
+    }
+    else
+    {
+        WheelPos -= 170;
+        return CRGB(0, WheelPos * 3, 255 - WheelPos * 3);
+    }
+}
 
 // Theater-style crawling lights with rainbow effect
 void theaterChaseRainbow(int cycles, int speed)
@@ -108,31 +128,12 @@ void allColor(CRGB c)
     FastLED.show();
 }
 
-void setBrightness(int level)
+void _setBrightness(int level)
 {
     FastLED.setBrightness(level);
     FastLED.show();
 }
 
-// Input a value 0 to 255 to get a color value.
-// The colours are a transition r - g - b - back to r.
-CRGB Wheel(byte WheelPos)
-{
-    if (WheelPos < 85)
-    {
-        return CRGB(WheelPos * 3, 255 - WheelPos * 3, 0);
-    }
-    else if (WheelPos < 170)
-    {
-        WheelPos -= 85;
-        return CRGB(255 - WheelPos * 3, 0, WheelPos * 3);
-    }
-    else
-    {
-        WheelPos -= 170;
-        return CRGB(0, WheelPos * 3, 255 - WheelPos * 3);
-    }
-}
 
 CRGB randomColor()
 {
@@ -179,14 +180,14 @@ void setup()
               { allColor(CRGB::Blue); });
     server.on("/purple", HTTP_GET, [](AsyncWebServerRequest *request)
               { allColor(CRGB::Purple); });
-    server.on("/yellow", HTTP_GET, [](AsyncWebServerRequest *request)
-              { allColor(CRGB::Yellow); });
+    server.on("/flash", HTTP_GET, [](AsyncWebServerRequest *request)
+              { theaterChaseRainbow(50, MEDIUM); });
     server.on("/low", HTTP_GET, [](AsyncWebServerRequest *request)
-              { setBrightness(LOW); });
+              { _setBrightness(LO); });
     server.on("/mid", HTTP_GET, [](AsyncWebServerRequest *request)
-              { setBrightness(MID); });
+              { _setBrightness(MID); });
     server.on("/high", HTTP_GET, [](AsyncWebServerRequest *request)
-              { setBrightness(HIGH); });
+              { _setBrightness(HI); });
 
     // Start server
     server.begin();

@@ -6,41 +6,92 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LED Controller</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <style>
+        body {
+            padding: 20px;
+            font-family: 'Courier New', monospace;
+        }
+
+        h2 {
+            padding-bottom: 20px;
+        }
+    </style>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 
 <body>
-    <div class="navbar">LED Controller</div>
 
-    <div class="center">
-        <h2>Color</h2>
-        <div class="btn-group">
-            <button class="button" id="red" onclick="changeColor(this)">Red</button>
-            <button class="button" id="green" onclick="changeColor(this)">Green</button>
-            <button class="button" id="blue" onclick="changeColor(this)">Blue</button>
-            <button class="button" id="purple" onclick="changeColor(this)">Purple</button>
-            <button class="button" id="yellow" onclick="changeColor(this)">Yellow</button>
+    <div class="text-center">
+
+        <h2>LED Controller</h2>
+
+        <h3 class="card-title">Mode</h3>
+
+        <div class="btn-group-vertical" role="group" aria-label="Basic example">
+            <button onclick="changeMode(1)" type="button" class="btn btn-dark btn-lg mt-2">Red</button>
+            <button onclick="changeMode(2)" type="button" class="btn btn-dark btn-lg mt-2">Green</button>
+            <button onclick="changeMode(3)" type="button" class="btn btn-dark btn-lg mt-2">Blue</button>
+            <button onclick="changeMode(4)" type="button" class="btn btn-dark btn-lg mt-2">Purple</button>
+            <button onclick="changeMode(5)" type="button" class="btn btn-dark btn-lg mt-2">Chase</button>
         </div>
-    </div>
 
-    <div class="center">
-        <h2>Brightness</h2>
-        <div class="btn-group">
-            <button class="button" id="low" onclick="changeBrightness(this)">Low</button>
-            <button class="button" id="med" onclick="changeBrightness(this)">Medium</button>
-            <button class="button" id="high" onclick="changeBrightness(this)">High</button>
+        <h3 class="card-title">Brightness</h3>
+
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <button onclick="changeBrightness(1)" type="button" class="btn btn-dark btn-lg mt-2">Low</button>
+            <button onclick="changeBrightness(2)" type="button" class="btn btn-dark btn-lg mt-2">Medium</button>
+            <button onclick="changeBrightness(3)" type="button" class="btn btn-dark btn-lg mt-2">High</button>
         </div>
-    </div>
 
-    <div class="footer">
-        <p id="text">Created by: Grayson Crozier</p>
     </div>
-
-    <script src="script.js"></script>
 
 </body>
+
+<script>
+    var xhttp = new XMLHttpRequest();
+    function changeMode(mode) {
+        console.log("mode changed to " + mode);
+        switch (mode) {
+            case 1:
+                xhttp.open("GET", "/red");
+                xhttp.send();
+                break;
+            case 2:
+                xhttp.open("GET", "/green");
+                xhttp.send();
+                break;
+            case 3:
+                xhttp.open("GET", "/blue");
+                xhttp.send();
+                break;
+            case 4:
+                xhttp.open("GET", "/purple");
+                xhttp.send();
+                break;
+            case 5:
+                xhttp.open("GET", "/flash");
+                xhttp.send();
+                break;
+        }
+    }
+    function changeBrightness(brightness) {
+        console.log("brightness changed to " + brightness)
+        switch (brightness) {
+            case 1:
+                xhttp.open("GET", "/low");
+                xhttp.send();
+                break;
+            case 2:
+                xhttp.open("GET", "/mid");
+                xhttp.send();
+                break;
+            case 3:
+                xhttp.open("GET", "/high");
+                xhttp.send();
+                break;
+        }
+    }
+</script>
 
 </html>
