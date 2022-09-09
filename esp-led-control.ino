@@ -11,7 +11,7 @@
 #define MEDIUM 50
 #define FAST 5
 #define LO 35
-#define MID 75
+#define MID 70
 #define HI 150
 
 // LED strip array.
